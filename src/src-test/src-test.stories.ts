@@ -1,3 +1,4 @@
+import { ParametersType } from '@types';
 import { html, TemplateResult } from 'lit';
 import './src-test';
 
@@ -12,7 +13,7 @@ export default {
   },
 };
 
-interface Story<T> {
+interface Story<T> extends ParametersType {
   (args: T): TemplateResult;
   args?: Partial<T>;
   argTypes?: Record<string, unknown>;
@@ -57,6 +58,12 @@ variantFalse.args = {
 export const CustomTitle = Template.bind({});
 CustomTitle.args = {
   title: 'My title',
+};
+export const InverseBackground = Template.bind({});
+InverseBackground.parameters = {
+  backgrounds: {
+    default: 'midnight',
+  },
 };
 
 export const CustomCounter = Template.bind({});
