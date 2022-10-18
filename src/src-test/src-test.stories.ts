@@ -6,10 +6,11 @@ export default {
   title: 'SrcTest',
   component: 'src-test',
   argTypes: {
-    variant: { control: 'boolean' },
-    title: { control: 'text' },
     counter: { control: 'number' },
+    inverse: { control: 'boolean' },
     textColor: { control: 'color' },
+    title: { control: 'text' },
+    variant: { control: 'boolean' },
   },
 };
 
@@ -20,25 +21,28 @@ interface Story<T> extends ParametersType {
 }
 
 interface ArgTypes {
-  variant?: boolean;
-  title?: string;
   counter?: number;
-  textColor?: string;
+  inverse?: boolean;
   slot?: TemplateResult;
+  textColor?: string;
+  title?: string;
+  variant?: boolean;
 }
 
 const Template: Story<ArgTypes> = ({
-  title = 'Hello world',
   counter = 5,
-  textColor,
-  variant = false,
+  inverse = false,
   slot,
+  textColor,
+  title = 'Hello world',
+  variant = false,
 }: ArgTypes) => html`
   <src-test
     style="--src-test-text-color: ${textColor || 'black'}"
-    .variant=${variant}
-    .title=${title}
     .counter=${counter}
+    .inverse=${inverse}
+    .title=${title}
+    .variant=${variant}
   >
     ${slot}
   </src-test>

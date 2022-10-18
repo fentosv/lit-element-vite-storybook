@@ -14,3 +14,8 @@
   /* Your custom properties */
   --v-color-primary-1: red;
 }
+
+.global-inverse {
+  border: 2px solid green;
+  background-color: aquamarine;
+}

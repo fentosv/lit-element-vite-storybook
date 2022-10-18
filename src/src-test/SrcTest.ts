@@ -1,37 +1,31 @@
-import { html, css, LitElement } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
+import style from './src-test.styles';
 
 export class SrcTest extends LitElement {
+  static styles = style;
   @property({ type: String }) title = 'Hey there';
 
   @property({ type: Number }) counter = 5;
 
   @property({ type: Boolean, reflect: true }) variant = false;
 
-  static styles = css`
-    :host {
-      display: block;
-      padding: 25px;
-      color: var(--src-test-text-color, #000);
-    }
-    .title {
-      color: red;
-    }
-    :host([variant]) .title {
-      border: 1px solid red;
-      background-color: blue;
-    }
-  `;
+  @property({ type: Boolean, reflect: true }) inverse = false;
 
   __increment() {
     this.counter += 1;
   }
 
   render() {
+    const classes = {
+      'global-inverse': this.inverse,
+    };
     return html`
       <h2 class="title">${this.title} Nr. ${this.counter}!</h2>
-      <h3>${this.variant}</h3>
       <button @click=${this.__increment}>increment</button>
+      <h3 class="variant">Variant ${this.variant}</h3>
+      <div class=${classMap(classes)}>Inverse ${this.inverse}</div>
     `;
   }
 }
